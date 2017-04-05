@@ -42,15 +42,21 @@ func cbc_encrypt() {
    		mode := cipher.NewCBCEncrypter(block, iv)
    		mode.CryptBlocks(ciphertext[aes.BlockSize:], plaintext)
 
-   		fmt.Printf("Encrypt : %x\n", ciphertext)
+   		fmt.Printf("Ciphertext : %x\n", ciphertext)
 }
 
 func cbc_decrypt() {
 
+		var ciphertexts string
+
 		key := []byte(os.Getenv("GOKEY"))
 
 		fmt.Printf("Key : %s\n", key)
-		ciphertext, _ := hex.DecodeString("a3f0015bc11fd02e08268540260857a495b64652c6c21c8447736acd960a6709")
+
+		fmt.Print("Enter Ciphertext : ")
+		fmt.Scanln(&ciphertexts)
+
+		ciphertext, _ := hex.DecodeString(ciphertexts)
 
     		block, err := aes.NewCipher(key)
     		if err != nil {
